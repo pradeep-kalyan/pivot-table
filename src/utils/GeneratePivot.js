@@ -160,7 +160,6 @@ export function generatePivotTable(data, headers, rows, columns, valueField) {
       rowTotal += cellValue;
     });
 
-    // Add row total
     dataRow.push(rowTotal);
     formattedTable.push(dataRow);
   });
