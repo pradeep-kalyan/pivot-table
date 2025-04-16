@@ -149,7 +149,7 @@ function App() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex w-full min-h-screen justify-center items-center bg-gradient-to-b from-blue-500 to-purple-600 p-4">
+      <div className="flex w-full min-h-screen justify-center items-center bg-gradient-to-r from-teal-300 via-teal-200 to-teal-500 p-4">
         <ToastContainer position="top-center" />
         <div className="flex flex-col items-center w-full max-w-6xl bg-white rounded-lg shadow-xl p-6 overflow-auto">
           <h1 className="text-3xl font-bold text-gray-800 mb-6 ly">
