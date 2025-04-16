@@ -3,10 +3,17 @@ import { useDrag } from "react-dnd";
 function DragItem({ header, type, moveItem }) {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "field", // Use a single type for all draggable items
-    item: { header },
+    item: { header, sourceType: type }, // Include the source type so we know where it came from
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
+    end: (item, monitor) => {
+      // Handle case when item is dropped outside of valid drop targets
+      const didDrop = monitor.didDrop();
+      if (!didDrop) {
+        // Reset if needed
+      }
+    },
   }));
 
   // Colors based on the type
@@ -21,16 +28,24 @@ function DragItem({ header, type, moveItem }) {
     }
   };
 
+  // Handle item click - this is important for mouse users who prefer clicking to dragging
+  const handleClick = () => {
+    // If it's already in rows or columns, don't allow moving by click
+    if (type === "field") {
+      moveItem(header, "row"); // Default to row when clicked
+    }
+  };
+
   return (
     <div
       ref={drag}
       className={`p-2 border rounded cursor-move ${getColors()} ${
         isDragging ? "opacity-50" : "opacity-100"
       }`}
-      onClick={() => moveItem(header, type === "field" ? "row" : type)}
-      title={`Drag to add '${header}' as a ${
-        type === "field" ? "dimension" : type
-      }`}
+      onClick={handleClick}
+      title={`${
+        type === "field" ? "Drag" : "Drag or click"
+      } to add '${header}' as a ${type === "field" ? "dimension" : type}`}
     >
       {header}
     </div>

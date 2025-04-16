@@ -85,18 +85,32 @@ function App() {
     }
   }, [data, headers, rows, columns, valueField]);
 
+  // Replace the moveItem function in your App.js
   const moveItem = (header, targetType) => {
+    // If header is already in the target area, don't add it again
+    if (
+      (targetType === "row" && rows.includes(header)) ||
+      (targetType === "column" && columns.includes(header))
+    ) {
+      return;
+    }
+
+    // If header is in the other area, remove it from there first
+    if (targetType === "row" && columns.includes(header)) {
+      setColumns(columns.filter((item) => item !== header));
+    } else if (targetType === "column" && rows.includes(header)) {
+      setRows(rows.filter((item) => item !== header));
+    }
+
+    // Now add the header to the target area
     if (targetType === "row") {
-      if (!rows.includes(header)) {
-        setRows([...rows, header]);
-      }
+      setRows([...rows, header]);
     } else if (targetType === "column") {
-      if (!columns.includes(header)) {
-        setColumns([...columns, header]);
-      }
+      setColumns([...columns, header]);
     }
   };
 
+  // Also replace the removeItem function to ensure proper cleanup
   const removeItem = (header, type) => {
     if (type === "row") {
       setRows(rows.filter((item) => item !== header));

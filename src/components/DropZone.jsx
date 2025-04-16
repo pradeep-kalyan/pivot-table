@@ -2,20 +2,30 @@ import { useDrop } from "react-dnd";
 
 function DropZone({ children, type, onDrop }) {
   const [{ isOver, canDrop }, drop] = useDrop(() => ({
-    accept: "field", // Accept the type from draggable items
+    accept: "field", // Accept items with type "field"
     drop: (item) => {
+      // Handle the drop with the item's data
       onDrop(item);
-      return { dropped: true };
+      return { name: type, dropped: true };
+    },
+    canDrop: (item) => {
+      // Prevent dropping an item from rows onto rows or columns onto columns
+      // This prevents duplicate fields in the same section
+      return item.sourceType !== type;
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
-      canDrop: !!monitor.canDrop(),
+      canDrop: !!monitor.canDrop() && monitor.isOver(),
     }),
   }));
 
   // Different highlight styles based on the drop zone type
   const getHighlightStyle = () => {
     if (!isOver) return "";
+    
+    if (!canDrop) {
+      return "ring-4 ring-red-300"; // Visual feedback for invalid drops
+    }
 
     if (type === "row") {
       return "ring-4 ring-blue-300 bg-blue-50";
@@ -30,8 +40,8 @@ function DropZone({ children, type, onDrop }) {
     <div
       ref={drop}
       className={`flex-1 transition-all duration-200 ${
-        isOver ? getHighlightStyle() : ""
-      }`}
+        isOver && !canDrop ? "cursor-no-drop" : ""
+      } ${getHighlightStyle()}`}
     >
       {children}
     </div>
