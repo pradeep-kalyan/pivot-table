@@ -1,12 +1,42 @@
-# React + Vite
+# 📊 Pivot Table Generator (React + Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, drag-and-drop **Pivot Table Generator** built with **React**, **Vite**, and **DnD Kit**. Easily analyze and summarize large datasets in a customizable table interface with row/column header configuration.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ⚡️ Blazing fast with Vite
+- 🧩 Drag-and-drop UI using DnD Kit
+- 📁 Upload or load custom datasets (CSV/JSON support planned)
+- 🔧 Customizable row and column headers
+- 📊 Dynamic aggregation and summarization
+- 🛡 Copy prevention to enhance UX (no accidental text selection)
+- 🎨 Sleek and responsive UI with Tailwind CSS
+- 🌗 Light/Dark mode support (optional)
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 📦 Tech Stack
+
+- **Frontend**: React + Vite
+- **State Management**: useState/useMemo
+- **Drag & Drop**: [DnD Kit](https://dndkit.com/)
+- **Styling**: Tailwind CSS
+- **Data Handling**: JavaScript (planned support for external CSV/JSON parsing)
+
+---
+
+## 🔧 Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/pivot-table-generator.git
+cd pivot-table-generator
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
+```
